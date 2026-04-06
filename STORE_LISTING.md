@@ -34,7 +34,7 @@ Tab Out replaces your new tab page with a living dashboard of everything you hav
 KEY FEATURES
 
 Mission Mode (AI-powered)
-Tab Out talks to a local AI server on your machine. Tell it your focus — "deep work on the investor deck" or "quick research on Tokyo restaurants" — and it will sort your open tabs into named missions using GPT-4. Click a mission to jump to it. Close a whole mission when you're done.
+Tab Out talks to a local AI server on your machine. Tell it your focus — "deep work on the investor deck" or "quick research on Tokyo restaurants" — and it will sort your open tabs into named missions using AI. Click a mission to jump to it. Close a whole mission when you're done.
 
 Domain Grouping (no AI required)
 Not in the mood for AI? One click groups your tabs by domain — all GitHub tabs together, all Notion tabs together, all that YouTube rabbit hole neatly labeled.
@@ -53,7 +53,7 @@ IMPORTANT: LOCAL SERVER REQUIRED
 Tab Out works with a companion local server that runs on your own computer. This is what enables the AI features — your tabs never leave your machine and are never sent to a third-party service. The server must be running in the background for AI grouping to work; domain grouping and the rest of the dashboard work without it.
 
 Setup instructions and the server code are open source and free:
-https://github.com/[your-github-username]/tab-mission-control
+https://github.com/zarazhangrui/tab-out
 
 PRIVACY
 
@@ -61,7 +61,7 @@ Tab Out does not collect, transmit, or store any browsing data on external serve
 
 FREE & OPEN SOURCE
 
-Tab Out is free to use. The source code is available on GitHub under the ISC license.
+Tab Out is free to use. The source code is available on GitHub under the MIT license.
 ```
 
 ---
