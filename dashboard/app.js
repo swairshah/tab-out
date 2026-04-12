@@ -1276,9 +1276,11 @@ document.addEventListener('click', async (e) => {
     playCloseSound();
     await fetchOpenTabs();
 
-    // Remove the chip from the DOM
+    // Remove the chip from the DOM with confetti
     const chip = actionEl.closest('.page-chip');
     if (chip) {
+      const rect = chip.getBoundingClientRect();
+      shootConfetti(rect.left + rect.width / 2, rect.top + rect.height / 2);
       chip.style.transition = 'opacity 0.2s, transform 0.2s';
       chip.style.opacity = '0';
       chip.style.transform = 'scale(0.8)';
