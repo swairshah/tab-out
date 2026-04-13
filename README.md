@@ -2,7 +2,7 @@
 
 **Keep tabs on your tabs.**
 
-Tab Out replaces your Chrome new tab page with a dashboard that shows everything you have open -- grouped by domain, with landing pages (Gmail, X, LinkedIn, etc.) pulled into their own group for easy cleanup. Close tabs with a satisfying swoosh + confetti.
+Tab Out replaces your browser's new tab page (Chrome or Firefox) with a dashboard that shows everything you have open -- grouped by domain, with landing pages (Gmail, X, LinkedIn, etc.) pulled into their own group for easy cleanup. Close tabs with a satisfying swoosh + confetti.
 
 Built for people who open too many tabs and never close them.
 
@@ -56,12 +56,26 @@ npm run install-service
 
 This creates `~/.mission-control/`, writes a default config, and installs an auto-start service for your platform (macOS Launch Agent, Linux systemd, or Windows Startup script).
 
-**3. Load the Chrome extension**
+**3. Load the browser extension**
 
-1. Go to `chrome://extensions` in Chrome
+For **Chrome** (or any Chromium-based browser):
+
+1. Go to `chrome://extensions`
 2. Enable **Developer mode** (top-right toggle)
 3. Click **Load unpacked**
 4. Select the `extension/` folder from this repo
+
+For **Firefox**:
+
+1. Go to `about:debugging#/runtime/this-firefox`
+2. Click **Load Temporary Add-on...**
+3. Select the `extension-firefox/manifest.json` file from this repo
+
+   Note: temporary add-ons are removed when Firefox restarts. To make it
+   permanent, package the `extension-firefox/` folder and sign it via
+   [addons.mozilla.org](https://addons.mozilla.org/developers/) or use
+   Firefox Developer Edition / Nightly with `xpinstall.signatures.required`
+   set to `false` in `about:config`.
 
 **4. Start the server**
 
@@ -104,7 +118,7 @@ The server runs silently in the background. It starts on login and restarts if i
 |------|-----|
 | Server | Node.js + Express |
 | Database | better-sqlite3 (local SQLite) |
-| Extension | Chrome Manifest V3 |
+| Extension | Manifest V3 (Chrome + Firefox) |
 | Auto-start | macOS Launch Agent / Linux systemd / Windows Startup |
 | Sound | Web Audio API (synthesized, no files) |
 | Animations | CSS transitions + JS confetti particles |
