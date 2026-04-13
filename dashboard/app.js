@@ -1697,7 +1697,56 @@ async function checkForUpdates() {
 }
 
 /* ----------------------------------------------------------------
+   THEME TOGGLE
+
+   The theme is applied pre-paint by an inline script in index.html
+   (so there's no flash of the wrong theme). This function just wires
+   up the toggle button and tracks OS-level changes for users who
+   haven't explicitly picked a theme.
+   ---------------------------------------------------------------- */
+function setupTheme() {
+  const STORAGE_KEY = 'tab-out-theme';
+  const root = document.documentElement;
+  const btn = document.getElementById('themeToggle');
+
+  function setTheme(theme, persist) {
+    root.setAttribute('data-theme', theme);
+    if (persist) {
+      try { localStorage.setItem(STORAGE_KEY, theme); } catch {}
+    }
+    if (btn) {
+      const next = theme === 'dark' ? 'light' : 'dark';
+      btn.setAttribute('aria-label', `Switch to ${next} mode`);
+      btn.setAttribute('title', `Switch to ${next} mode`);
+    }
+  }
+
+  // Re-apply the current theme so the button label is in sync
+  setTheme(root.getAttribute('data-theme') || 'light', false);
+
+  if (btn) {
+    btn.addEventListener('click', () => {
+      const current = root.getAttribute('data-theme') || 'light';
+      setTheme(current === 'dark' ? 'light' : 'dark', true);
+    });
+  }
+
+  // If the user hasn't picked a theme, follow OS-level changes live
+  if (window.matchMedia) {
+    const mq = window.matchMedia('(prefers-color-scheme: dark)');
+    const handler = (e) => {
+      let saved = null;
+      try { saved = localStorage.getItem(STORAGE_KEY); } catch {}
+      if (!saved) setTheme(e.matches ? 'dark' : 'light', false);
+    };
+    if (mq.addEventListener) mq.addEventListener('change', handler);
+    else if (mq.addListener) mq.addListener(handler);
+  }
+}
+
+/* ----------------------------------------------------------------
    INITIALIZE
    ---------------------------------------------------------------- */
+setupTheme();
 renderDashboard();
 checkForUpdates();
